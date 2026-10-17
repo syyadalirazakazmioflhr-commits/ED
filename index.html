@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DesignForge — T-Shirt Design Extractor & Remixer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">🎨 DesignForge</div>
+    <div class="tagline">Upload a mockup → get a fresh, print-ready design</div>
+  </header>
+
+  <main>
+    <!-- STEP 1: UPLOAD -->
+    <section id="upload-section" class="card">
+      <h2>1 · Upload your T-shirt mockup</h2>
+      <div id="dropzone" class="dropzone">
+        <p><strong>Drag & drop</strong> your design image here</p>
+        <p class="muted">or</p>
+        <button id="browse-btn" class="btn">Browse files</button>
+        <p class="muted small">PNG · JPG · WEBP — solid or simple backgrounds work best</p>
+      </div>
+      <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" hidden />
+    </section>
+
+    <!-- STEP 2: PROCESSING -->
+    <section id="process-section" class="card hidden">
+      <h2>2 · AI pipeline</h2>
+      <ol class="steps">
+        <li id="step-analyze"><span class="dot"></span>Analyzing image & colors</li>
+        <li id="step-extract"><span class="dot"></span>Extracting design (background removal)</li>
+        <li id="step-generate"><span class="dot"></span>Generating new copyright-safe variations</li>
+        <li id="step-ready"><span class="dot"></span>Ready — pick a variation & download</li>
+      </ol>
+      <div class="progress"><div id="progress-bar"></div></div>
+    </section>
+
+    <!-- STEP 3: RESULTS -->
+    <section id="results-section" class="card hidden">
+      <h2>3 · Results</h2>
+      <div class="previews">
+        <figure>
+          <canvas id="original-canvas"></canvas>
+          <figcaption>Original (detected design area)</figcaption>
+        </figure>
+        <figure>
+          <canvas id="extracted-canvas"></canvas>
+          <figcaption>Extracted design</figcaption>
+        </figure>
+      </div>
+
+      <h3>New design variations — click to select</h3>
+      <div id="variations" class="variations"></div>
+
+      <div class="controls">
+        <div class="res-buttons">
+          <button class="btn res" data-res="2048">2K</button>
+          <button class="btn res" data-res="4096">4K</button>
+          <button class="btn res" data-res="8192">8K</button>
+        </div>
+        <button id="download-btn" class="btn primary" disabled>Download PNG</button>
+      </div>
+      <p id="status" class="muted"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>DesignForge MVP · runs 100% in your browser · no uploads, no accounts</p>
+  </footer>
+
+  <script src="js/extract.js"></script>
+  <script src="js/generate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
